@@ -215,12 +215,16 @@ int main()
             if (flag0 == r1 || flag0 == r2)
             {
                 grid[i][j] = 2;
+                cout << "2     ";
             }
-            cout << grid[i][j] << "     ";
+            else
+            {
+                cout << ".     ";
+            }
         }
         cout << endl;
     }
-    //cout << "- - - - - - - - - -" << endl;
+    // cout << "- - - - - - - - - -" << endl;
     while (1)
     {
         int ch;
@@ -399,47 +403,74 @@ int main()
                 }
             }
         }
-        copy(&grid2[0][0], &grid2[0][0] + 16, &grid[0][0]);
+        // while (1)
+        // {
+        //     if (!_kbhit())
+        //     {
+        //         break;
+        //     }
+        // }
+        if (is_same_g(grid, grid2))
+        {
+            continue;
+        }
         int z = 0;
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                if (grid[i][j] == 0)
+                if (grid2[i][j] == 0)
                 {
                     z++;
                 }
             }
         }
         Clear();
-        int r3 = rand() % (z + 1);
+        int r3 = -1;
+        if (z == 0)
+        {
+            if (is_over(grid2))
+            {
+                cout << "Game Over..." << endl;
+                break;
+            }
+        }
+        else
+        {
+            r3 = 1 + rand() % z;
+        }
         int flag = 0;
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                if (grid[i][j] == 0)
+                if (grid2[i][j] == 0)
                 {
                     flag++;
                     if (flag == r3)
                     {
-                        grid[i][j] = 2;
+                        grid2[i][j] = 2;
+                        cout << "2";
                     }
-                }     
-                cout << grid[i][j];
-                int l = to_string(grid[i][j]).size();
-                for(int space = 1;space<=6-l;space++){
+                    else
+                    {
+                        cout << ".";
+                    }
+                }
+                else
+                {
+                    cout << grid2[i][j];
+                }
+                int l = to_string(grid2[i][j]).size();
+                for (int space = 1; space <= 6 - l; space++)
+                {
                     cout << " ";
                 }
             }
             cout << endl;
         }
-        //cout << "- - - - - - - - - -" << endl;
-        if (is_over(grid))
-        {
-            cout << "Game Over..." << endl;
-            break;
-        }
+        // cout << "- - - - - - - - - -" << endl;
+        copy(&grid2[0][0], &grid2[0][0] + 16, &grid[0][0]);
     }
     cout << "Press any key to exit..." << endl;
     while (1)
