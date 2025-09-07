@@ -427,15 +427,7 @@ int main()
         }
         Clear();
         int r3 = -1;
-        if (z == 0)
-        {
-            if (is_over(grid2))
-            {
-                cout << "Game Over..." << endl;
-                break;
-            }
-        }
-        else
+        if (z != 0)
         {
             r3 = 1 + rand() % z;
         }
@@ -468,6 +460,19 @@ int main()
                 }
             }
             cout << endl;
+        }
+        if (z == 0 || z == 1)
+        {
+            if (is_over(grid2))
+            {
+                cout << "Game Over..." << endl;
+                break;
+            }
+        }
+        if (is_over(grid2))
+        {
+            cout << "Game Over..." << endl;
+            break;
         }
         // cout << "- - - - - - - - - -" << endl;
         copy(&grid2[0][0], &grid2[0][0] + 16, &grid[0][0]);
